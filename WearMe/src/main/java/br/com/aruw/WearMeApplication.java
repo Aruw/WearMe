@@ -1,4 +1,4 @@
-package br.com.aruw.wearme;
+package br.com.aruw;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
