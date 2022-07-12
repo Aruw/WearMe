@@ -1,6 +1,7 @@
 package br.com.aruw.beans;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="TB_ADDRESS")
@@ -33,12 +34,95 @@ public class Address {
     private String referencePoint;
 
     @ManyToOne
+    @JsonIgnoreProperties("addresses")
     private User user;
 
     public Address(){
 
     }
 
+    public Address(int addressId, String cep, String city, int number, String state, String street, String complement, String referencePoint, User user) {
+        this.addressId = addressId;
+        this.cep = cep;
+        this.city = city;
+        this.number = number;
+        this.state = state;
+        this.street = street;
+        this.complement = complement;
+        this.referencePoint = referencePoint;
+        this.user = user;
+    }
 
+    public int getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getComplement() {
+        return complement;
+    }
+
+    public void setComplement(String complement) {
+        this.complement = complement;
+    }
+
+    public String getReferencePoint() {
+        return referencePoint;
+    }
+
+    public void setReferencePoint(String referencePoint) {
+        this.referencePoint = referencePoint;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 }
