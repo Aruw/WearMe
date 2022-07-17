@@ -33,8 +33,8 @@ public class Address {
     @Column(name="REFERENCE_POINT", length=200 ,nullable=false)
     private String referencePoint;
 
-    @ManyToOne
-    @JsonIgnoreProperties("addresses")
+    @OneToOne(mappedBy="address")
+    //@JsonIgnoreProperties("address")
     private User user;
 
     public Address(){
