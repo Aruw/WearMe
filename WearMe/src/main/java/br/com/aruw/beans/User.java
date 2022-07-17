@@ -41,19 +41,21 @@ public class User {
     @Column(name="PHONE_NUMBER", length=11 ,nullable=false)
     private String phoneNumber;
 
-    @JsonIgnoreProperties("user")
-    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-    private List<Address> addresses;
+    //@JsonIgnoreProperties("user")
+    //One To One relation - Implemented with a Foreign Key in JPA
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="ADDRESS_ID", referencedColumnName="ADDRESS_ID")
+    private Address address;
 
     @JsonIgnoreProperties("user")
-    @ManyToMany(mappedBy="user", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Order> orders;
 
     public User(){
 
     }
 
-    public User(int userID, String cpf, String email, String name, Date birthday, String lastName, String nickName, String password, String phoneNumber, List<Address> addresses, List<Order> orders) {
+    public User(int userID, String cpf, String email, String name, Date birthday, String lastName, String nickName, String password, String phoneNumber, Address address, List<Order> orders) {
         this.userID = userID;
         this.cpf = cpf;
         this.email = email;
@@ -63,7 +65,7 @@ public class User {
         this.nickName = nickName;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.addresses = addresses;
+        this.address = address;
         this.orders = orders;
     }
 
@@ -139,12 +141,12 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<Address> getAddresses() {
-        return addresses;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public List<Order> getOrders() {

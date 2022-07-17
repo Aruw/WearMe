@@ -13,7 +13,7 @@ public class Product {
 
     @Id
     @Column(name="PRODUCT_ID")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int productID;
 
     @Column(name="SIZE")
@@ -35,22 +35,22 @@ public class Product {
     @Column(name="DETAILS", length=255 ,nullable=false)
     private String details;
 
-    @Column(name="RELEASE")
+    @Column(name="LAUNCHED_DATE", nullable=false)
     @Temporal(value=TemporalType.DATE)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
-    private Date release;
+    private Date launchedDate;
 
     @Column(name="IMAGE_URL", length=255 ,nullable=false)
     private String imageUrl;
 
-    @ManyToMany
+    @ManyToMany(mappedBy="products")
     private List<Order> order;
 
     public Product(){
 
     }
 
-    public Product(int productID, Size size, int quantity, boolean gift, BigDecimal price, String name, String details, Date release, String imageUrl, List<Order> order) {
+    public Product(int productID, Size size, int quantity, boolean gift, BigDecimal price, String name, String details, Date launchedDate, String imageUrl, List<Order> order) {
         this.productID = productID;
         this.size = size;
         this.quantity = quantity;
@@ -58,7 +58,7 @@ public class Product {
         this.price = price;
         this.name = name;
         this.details = details;
-        this.release = release;
+        this.launchedDate = launchedDate;
         this.imageUrl = imageUrl;
         this.order = order;
     }
@@ -119,12 +119,12 @@ public class Product {
         this.details = details;
     }
 
-    public Date getRelease() {
-        return release;
+    public Date getLaunchedDate() {
+        return launchedDate;
     }
 
-    public void setRelease(Date release) {
-        this.release = release;
+    public void setLaunchedDate(Date launchedDate) {
+        this.launchedDate = launchedDate;
     }
 
     public String getImageUrl() {

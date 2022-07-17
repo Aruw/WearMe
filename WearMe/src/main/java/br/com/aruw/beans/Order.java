@@ -24,26 +24,26 @@ public class Order {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
     private Date purchaseDate;
 
-    @Column(name="DELIVERY_ADDRESS")
-    @JsonIgnoreProperties("addresses")
-    private Address deliveryAddress;
-
     @ManyToOne
     @JsonIgnoreProperties("orders")
+    @JoinColumn(name="USER_ID", nullable=false)
     private User user;
 
     @ManyToMany
+    @JoinTable(
+            name="order_product",
+            joinColumns = @JoinColumn(name="oderID"),
+            inverseJoinColumns = @JoinColumn(name="productID"))
     private List<Product> products;
 
     public Order(){
 
     }
 
-    public Order(int oderID, BigDecimal total, Date purchaseDate, Address deliveryAddress, User user, List<Product> products) {
+    public Order(int oderID, BigDecimal total, Date purchaseDate, User user, List<Product> products) {
         this.oderID = oderID;
         this.total = total;
         this.purchaseDate = purchaseDate;
-        this.deliveryAddress = deliveryAddress;
         this.user = user;
         this.products = products;
     }
@@ -70,14 +70,6 @@ public class Order {
 
     public void setPurchaseDate(Date purchaseDate) {
         this.purchaseDate = purchaseDate;
-    }
-
-    public Address getDeliveryAddress() {
-        return deliveryAddress;
-    }
-
-    public void setDeliveryAddress(Address deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
     }
 
     public User getUser() {
