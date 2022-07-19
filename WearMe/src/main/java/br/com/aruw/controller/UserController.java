@@ -2,6 +2,7 @@ package br.com.aruw.controller;
 
 import br.com.aruw.beans.User;
 import br.com.aruw.dao.UserDAO;
+import br.com.aruw.jwtutils.JwtTokenUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +44,18 @@ public class UserController {
             return ResponseEntity.status(403).build();
         }
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> generateToken(@RequestBody User object){
+        User user = userDAO.findByEmailAndPassword(object.getEmail(), object.getPassword());
+
+        if(user == null){
+            return ResponseEntity.status(404).build();
+        }
+
+        JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
+        String token = jwtTokenUtil.generateToken(object);
+        return ResponseEntity.ok(token);
+    }
+
 }

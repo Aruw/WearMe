@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import br.com.aruw.enums.Size;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="TB_PRODUCT")
@@ -29,10 +30,10 @@ public class Product {
     @Column(name="PRICE", nullable=false)
     private BigDecimal price;
 
-    @Column(name="NAME", length=50 ,nullable=false)
+    @Column(name="NAME", length=50, nullable=false)
     private String name;
 
-    @Column(name="DETAILS", length=255 ,nullable=false)
+    @Column(name="DETAILS", length=255, nullable=false)
     private String details;
 
     @Column(name="LAUNCHED_DATE", nullable=false)
@@ -40,10 +41,11 @@ public class Product {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
     private Date launchedDate;
 
-    @Column(name="IMAGE_URL", length=255 ,nullable=false)
+    @Column(name="IMAGE_URL", length=255, nullable=false)
     private String imageUrl;
 
     @ManyToMany(mappedBy="products")
+    @JsonIgnoreProperties("products")
     private List<Order> order;
 
     public Product(){
