@@ -15,13 +15,13 @@ public class User {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int userID;
 
-    @Column(name="CPF", length=11 ,nullable=false)
+    @Column(name="CPF", length=11, nullable=false)
     private String cpf;
 
-    @Column(name="EMAIL", length=100 ,nullable=false)
+    @Column(name="EMAIL", length=100, nullable=false)
     private String email;
 
-    @Column(name="NAME", length=30 ,nullable=false)
+    @Column(name="NAME", length=30, nullable=false)
     private String name;
 
     @Column(name="BIRTHDAY")
@@ -29,19 +29,19 @@ public class User {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
     private Date birthday;
 
-    @Column(name="LAST_NAME", length=30 ,nullable=false)
+    @Column(name="LAST_NAME", length=30, nullable=false)
     private String lastName;
 
-    @Column(name="NICK_NAME", length=30 ,nullable=false)
+    @Column(name="NICK_NAME", length=30, nullable=false)
     private String nickName;
 
-    @Column(name="PASSWORD", length=20 ,nullable=false)
+    @Column(name="PASSWORD", length=20, nullable=false)
     private String password;
 
-    @Column(name="PHONE_NUMBER", length=11 ,nullable=false)
+    @Column(name="PHONE_NUMBER", length=11, nullable=false)
     private String phoneNumber;
 
-    //@JsonIgnoreProperties("user")
+    @JsonIgnoreProperties("user")
     //One To One relation - Implemented with a Foreign Key in JPA
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="ADDRESS_ID", referencedColumnName="ADDRESS_ID")

@@ -34,6 +34,7 @@ public class Order {
             name="order_product",
             joinColumns = @JoinColumn(name="oderID"),
             inverseJoinColumns = @JoinColumn(name="productID"))
+    @JsonIgnoreProperties("order")
     private List<Product> products;
 
     public Order(){
